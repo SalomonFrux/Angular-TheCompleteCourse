@@ -15,7 +15,6 @@ export class ApplicationServices {
         image: "https://static.superiorwallpapers.com/images/lthumbs/2015-10/11205_Your-secret-book-with-food-recipes.jpg"
     },
     {
-       
         name: "The Second  recipe",
         content: "this is the second content to show that it  works",
         image: "https://image.freepik.com/free-photo/thai-food-nam-prik-ong-pork-cooked-with-tomato_1150-38207.jpg"
@@ -48,11 +47,21 @@ export class ApplicationServices {
 
     updateRecipes(id: number, recipe: Recipe){
         this.recipes[id] = recipe;
-        console.log(this.recipes[id] )
     }
     addRecipes(newRecipe: Recipe){
-        this.recipes.push(newRecipe);        
-        console.log(newRecipe);
-        console.log(this.recipes);
+       const shrinked = this.shrinkContent(newRecipe)
+        this.recipes.push(shrinked);        
+    }
+
+    getRecipes(){
+      return this.recipes;
+    }
+
+    private shrinkContent(recipe:Recipe){
+        let subStr = ''
+        if(recipe.content.length >110){
+           subStr = recipe.content.substr(0, 110) + '...';
+        }
+        return new Recipe(recipe.name, subStr, recipe.image);
     }
 }

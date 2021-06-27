@@ -4,4 +4,5 @@ export class Recipe {
         public content: string, public image: string, ) {
        
     }
+
 }

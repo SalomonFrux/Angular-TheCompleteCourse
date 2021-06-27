@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormControl, FormControlDirective, FormGroup, NgForm } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApplicationServices } from 'src/app/services/application.services';
 import { Recipe } from 'src/app/Shared/recipe.model';
 
@@ -15,9 +15,9 @@ export class EditComponent implements OnInit {
   editForm!: FormGroup;
   recipeToEdit!: Recipe;
   recipes!: Recipe[];
- 
+  paramId = 0;
   constructor(private activateRoute: ActivatedRoute, 
-    private appServices: ApplicationServices) {
+    private appServices: ApplicationServices , private router: Router) {
 
      }
 
@@ -25,9 +25,9 @@ export class EditComponent implements OnInit {
     
    this.recipes = this.appServices.recipes;
     this.activateRoute.params.subscribe((params: Params) => {
-      let paramId = params.id;
+       this.paramId = params.id;
       let edit = params.name;
-      this.recipeToEdit = this.appServices.getSingleRecipe(paramId)
+      this.recipeToEdit = this.appServices.getSingleRecipe(this.paramId )
 
       if (edit === "edit") {
         this.notEditable = false;
@@ -49,9 +49,8 @@ export class EditComponent implements OnInit {
      this.recipeToEdit = new Recipe(
      this.editForm.value["name"],
      this.editForm.value["description"],  this.editForm.value["imageUrl"])
-    //  this.appServices.updateRecipes(this.recipeToEdit.id, this.recipeToEdit);
-    this.appServices.addRecipes(this.recipeToEdit);
-     
+     this.appServices.updateRecipes(this.paramId , this.recipeToEdit);
+     this.router.navigate(['/recipe'])
     
   }
 

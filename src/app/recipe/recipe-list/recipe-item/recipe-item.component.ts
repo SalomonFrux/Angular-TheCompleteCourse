@@ -16,7 +16,8 @@ export class RecipeItemComponent implements OnInit {
  }
 
   ngOnInit(): void {
-    this.recipes.push(...this.appServices.recipes)
+    // this.recipes.push(...this.appServices.recipes)
+    this.recipes = this.appServices.getRecipes();
   }
   
   onRecipeItemClicked(item:Recipe){

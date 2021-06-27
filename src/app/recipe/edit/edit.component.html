@@ -1,0 +1,32 @@
+
+<form class="mt-5" *ngIf="!notEditable" [formGroup]="editForm" 
+(ngSubmit)="onSaveBtnClicked()">
+
+    <div class="row">   
+        <div class="col-12">
+            
+        <label for="name">Recipe Name</label>
+        <input class="form-control" type="text" name="name"  formControlName="name">
+        </div>
+
+        <div class="col-12">
+            <label for="my-textarea" >Recipe Description</label>
+            <textarea id="my-textarea" class="form-control" name="text" rows="3" 
+            formControlName="description"></textarea>
+        </div>
+        
+        <div class="col-12">
+            <div class="">
+                <label for="image" >Image Url</label>
+                <input class="col-12" #imagePath  class="form-control" type="text"  name="image"   formControlName="imageUrl">
+                <img [src]="imagePath.value" alt="avatar" style="width: 400px; height: 200px; margin-top: 10px;">
+            </div>
+           
+            
+        </div>
+        <div class="col-4 mt-2">
+        <button class="btn btn-success" type="submit" *ngIf="editForm.valid"
+         >Save Recipe </button>
+        </div>
+    </div>
+</form>

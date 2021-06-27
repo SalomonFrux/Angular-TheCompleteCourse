@@ -1,0 +1,40 @@
+<nav class="navbar container-fluid navbar-expand-lg navbar-dark bg-primary  pt-3">
+    <a class="navbar-brand" routerLink="/home">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item "  routerLinkActive="active">
+          <a class="nav-link "  
+          routerLink="/recipe"  
+          >Recipe<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item " routerLinkActive="active">
+          <a class="nav-link" routerLink="/shopping-list"  
+          >Shopping List<span class="sr-only">(current)</span></a>
+        </li>
+  
+      </ul>
+      <ul class="navbar-nav headerAnchor">
+             
+        <li class="nav-item dropdown show">
+          <a class="nav-link dropdown-toggle"  
+          
+          data-toggle="dropdown" 
+          aria-haspopup="true" aria-expanded="false"  (click)="dropDownToggle()">
+            Dropdown
+          </a>
+          <div class="dropdown-menu show" aria-labelledby="navbarDropdown" id="headerDropdown" *ngIf="!openDropDown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">View details</a>
+          </div>
+        </li>
+      </ul>
+      
+
+    </div>
+  </nav>

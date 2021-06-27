@@ -1,0 +1,27 @@
+<app-header (featureSelected)="showSelected($event)"></app-header>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-12">
+         <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- 
+    <div class="row">
+        <app-recipe-list (shoppingBtnClicked)="onDataAdded($event)" *ngIf="displayClickedTab==='recipe'">
+        </app-recipe-list>
+        <div class="col-6" *ngIf="displayClickedTab==='recipe'">
+
+            <app-recipe-item *ngFor="let item of recipeItem"></app-recipe-item>
+        </div>
+        
+    <div class="col-6" *ngIf="displayClickedTab==='recipe'">
+        <app-recipe-details>
+        </app-recipe-details>
+    </div>
+</div> -->

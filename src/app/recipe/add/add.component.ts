@@ -28,7 +28,7 @@ showForm='';
 
   onNewrecipeAdded(form:NgForm){
     let formValue = form.value;
-    let recipe = new Recipe(formValue.name, formValue.text, formValue.image);
+    let recipe = new Recipe(formValue.name, formValue.text, formValue.image, formValue['ingredient']);
     this.appService.addRecipes(recipe);
     form.reset();
 

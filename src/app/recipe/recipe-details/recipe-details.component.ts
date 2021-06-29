@@ -1,7 +1,7 @@
+import { Ingredient } from './../../Shared/Ingredient.model';
 import { ApplicationServices } from './../../services/application.services';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/Shared/recipe.model';
-import { Ingredient } from 'src/app/Shared/Ingredient.model';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -11,10 +11,10 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class RecipeDetailsComponent implements OnInit {
   userSelectedRecipe = false;
-  recipeReceived: Recipe = { name: "", content: "", image: "" };
+  recipeReceived!: Recipe;
   ingredients: Ingredient[] = [];
   Id: number = 0;
-  singleRecipe: Recipe = {  name: "", content: "",  image: "" };
+  singleRecipe!: Recipe;
   addShowClass = '!show'
 
   constructor(private applicationServices: ApplicationServices,

@@ -9,16 +9,19 @@ export class ApplicationServices {
     addRecipeEvent = new Subject<void>();
     editClicked =new Subject<void>();
 
-    recipes: Recipe [] =  [  {
-        name: "The first  recipe",
-        content: "This is the first content of the array of recipes, I have done it. Let watch the vid later to see how he did it.",
-        image: "https://static.superiorwallpapers.com/images/lthumbs/2015-10/11205_Your-secret-book-with-food-recipes.jpg"
-    },
-    {
-        name: "The Second  recipe",
-        content: "this is the second content to show that it  works",
-        image: "https://image.freepik.com/free-photo/thai-food-nam-prik-ong-pork-cooked-with-tomato_1150-38207.jpg"
-    }]
+    recipes: Recipe [] =  [  new Recipe( "The first  recipe",
+     "This is the first content of the array of recipes, I have done it. Let watch the vid later to see how he did it.",
+    "https://static.superiorwallpapers.com/images/lthumbs/2015-10/11205_Your-secret-book-with-food-recipes.jpg",
+    
+    [
+        new Ingredient('Meat', 1),
+        new Ingredient('saussage', 6),
+        new Ingredient('Tomato', 4)
+    ]
+    )
+       
+     
+  ]
 
     ingredients: Ingredient [] = [{
         name: "Tomato",
@@ -33,13 +36,7 @@ export class ApplicationServices {
      return this.ingredients; 
   }
 
-    // getRecipes(id: number){
-    //   const recipeWithId = this.recipes.find(x => {
-    //       return  x.id === id;
-    //     })
-
-    //     return recipeWithId;
-    // }
+ //TODO Ingredient Error ...... to solve
 
     getSingleRecipe(id: number){
         return this.recipes[id]
@@ -62,6 +59,6 @@ export class ApplicationServices {
         if(recipe.content.length >110){
            subStr = recipe.content.substr(0, 110) + '...';
         }
-        return new Recipe(recipe.name, subStr, recipe.image);
+        return new Recipe(recipe.name, subStr, recipe.image, recipe.ingredient);
     }
 }

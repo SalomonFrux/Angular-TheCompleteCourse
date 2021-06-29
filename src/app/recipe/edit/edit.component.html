@@ -1,8 +1,16 @@
 
-<form class="mt-5" *ngIf="!notEditable" [formGroup]="editForm" 
+<form class="mt-4 mb-4" *ngIf="!notEditable" [formGroup]="editForm" 
 (ngSubmit)="onSaveBtnClicked()">
 
-    <div class="row">   
+    <div class="row ">   
+        <div class="btn-group ml-3 mb-3" role="group" aria-label="Button group">
+            <button class="btn btn-success mr-2" type="submit" *ngIf="editForm.valid"
+            >Save</button>
+            <button class="btn btn-danger" type="submit" *ngIf="editForm.valid"
+            >Cancel</button>
+        </div>
+       
+        
         <div class="col-12">
             
         <label for="name">Recipe Name</label>
@@ -20,13 +28,20 @@
                 <label for="image" >Image Url</label>
                 <input class="col-12" #imagePath  class="form-control" type="text"  name="image"   formControlName="imageUrl">
                 <img [src]="imagePath.value" alt="avatar" style="width: 400px; height: 200px; margin-top: 10px;">
-            </div>
-           
-            
+            </div>          
         </div>
-        <div class="col-4 mt-2">
-        <button class="btn btn-success" type="submit" *ngIf="editForm.valid"
-         >Save Recipe </button>
+        
+        <div formArrayName="ingredients" class="mt-4">
+           
+            <div *ngFor="let item of getControls(); let i =index" 
+            [formGroupName]="i">
+               
+            <div class="mt-1" >
+                  <input class="col-8" style="margin-left: 14px; margin-right: 10px;" type="text" formControlName="name">
+                  <input class="col-2 mr-3"  type="number" formControlName="amount">
+                  <button class="col-1 btn btn-sm btn-danger" >X</button>
+            </div>
+            </div>
         </div>
     </div>
 </form>

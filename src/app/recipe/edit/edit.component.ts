@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { FormControl, FormControlDirective, FormGroup, NgForm } from '@angular/forms';
+import { FormArray, FormControl, FormControlDirective, FormGroup, NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApplicationServices } from 'src/app/services/application.services';
 import { Recipe } from 'src/app/Shared/recipe.model';
@@ -16,6 +16,9 @@ export class EditComponent implements OnInit {
   recipeToEdit!: Recipe;
   recipes!: Recipe[];
   paramId = 0;
+  recipeIngredients = new FormArray([]);
+  
+
   constructor(private activateRoute: ActivatedRoute, 
     private appServices: ApplicationServices , private router: Router) {
 
@@ -33,27 +36,44 @@ export class EditComponent implements OnInit {
         this.notEditable = false;
       }
       this.initEditForm();
+      this.getControls();
+
     }); 
   }
 
   private initEditForm(){
-  //TODO: need to put this in its own method
-  this.editForm = new FormGroup({
+    
+
+     this.editForm = new FormGroup({
     "name": new FormControl(this.recipeToEdit.name),
     "description": new FormControl(this.recipeToEdit.content),
-    "imageUrl": new FormControl(this.recipeToEdit.image)
+    "imageUrl": new FormControl(this.recipeToEdit.image),
+    "ingredients": this.recipeIngredients
+    
   })
+    if(this.recipeToEdit['ingredient']){
+      this.recipeToEdit.ingredient.forEach(ingredient => {
+        this.recipeIngredients.push(new FormGroup({
+          name: new FormControl(ingredient.name),
+          amount: new FormControl(ingredient.amount)
+        }))
+      });
+    }
   }
 
   onSaveBtnClicked(){
      this.recipeToEdit = new Recipe(
      this.editForm.value["name"],
-     this.editForm.value["description"],  this.editForm.value["imageUrl"])
+     this.editForm.value["description"], 
+      this.editForm.value["imageUrl"],
+      this.editForm.value['ingredient'] )
      this.appServices.updateRecipes(this.paramId , this.recipeToEdit);
      this.router.navigate(['/recipe'])
     
   }
 
+  getControls(){
+   return (this.editForm.get('ingredients') as FormArray).controls
+  }
 }
-
 

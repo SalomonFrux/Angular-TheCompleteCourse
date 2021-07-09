@@ -2,7 +2,7 @@
     <h4 class="text-center  mt-4 selectItem">Please Select a Recipe</h4>
 </ng-template>
 
-<div *ngIf="userSelectedRecipe; else notSelected" class="mt-4 row">
+<div *ngIf="userSelectedRecipe; else notSelected" class="mt-4 row mb-4" >
 
 
     <div class="col-12">
@@ -33,11 +33,22 @@
      
         <div class="">
             {{recipeReceived.content}}
-            <a class="btn btn-sm btn-info" href="">Read More</a>
+            <a class="btn btn-link" href="">Read More</a>
         </div>
-
+        <hr>
         <div class="list-group ">
             <h5 class="text-info">List of Ingredients</h5>
+
+            <div><label class="col-9"  for="ingredient">Ingredient</label> 
+                <label class="col-3" for="amount">Amount</label> </div>
+            
+          <div *ngFor="let item of recipeReceived['ingredient']">
+             <input type="text"  readonly  name="ingredientItems"
+               class="col-9" [value]="item.name">
+             <input type="text"  readonly  name="inigredientAmount"
+             class="col-3 text-center" [value]="item.amount" style="font-weight:bold">
+              
+            </div>
         </div>
 
     </div>

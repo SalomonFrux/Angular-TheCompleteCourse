@@ -44,9 +44,10 @@ export class ApplicationServices {
 
     updateRecipes(id: number, recipe: Recipe){
         this.recipes[id] = recipe;
+        console.log(recipe);
     }
     addRecipes(newRecipe: Recipe){
-       const shrinked = this.shrinkContent(newRecipe)
+       const shrinked = this.shrinkContent(newRecipe);
         this.recipes.push(shrinked);        
     }
 
@@ -58,7 +59,9 @@ export class ApplicationServices {
         let subStr = ''
         if(recipe.content.length >110){
            subStr = recipe.content.substr(0, 110) + '...';
+         return new Recipe(recipe.name, subStr, recipe.image, recipe.ingredient);
+        }else{
+         return new Recipe(recipe.name, recipe.content, recipe.image, recipe.ingredient);
         }
-        return new Recipe(recipe.name, subStr, recipe.image, recipe.ingredient);
     }
 }

@@ -37,7 +37,6 @@ export class EditComponent implements OnInit {
       }
       this.initEditForm();
       this.getControls();
-
     }); 
   }
 
@@ -67,13 +66,23 @@ export class EditComponent implements OnInit {
      this.editForm.value["description"], 
       this.editForm.value["imageUrl"],
       this.editForm.value['ingredient'] )
-     this.appServices.updateRecipes(this.paramId , this.recipeToEdit);
+     this.appServices.updateRecipes(this.paramId,
+       new Recipe(this.recipeToEdit.name, this.recipeToEdit.content, 
+        this.recipeToEdit.image, this.recipeIngredients.value));
      this.router.navigate(['/recipe'])
+    
     
   }
 
   getControls(){
    return (this.editForm.get('ingredients') as FormArray).controls
+  }
+
+  onAddIngredientClicked(){
+    this.recipeIngredients.push(new FormGroup({
+      "name": new FormControl(""),
+      "amount": new FormControl("1")
+    }))
   }
 }
 

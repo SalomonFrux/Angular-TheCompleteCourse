@@ -1,8 +1,9 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApplicationServices } from 'src/app/services/application.services';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormArray } from '@angular/forms';
 import { Recipe } from 'src/app/Shared/recipe.model';
+import { Ingredient } from 'src/app/Shared/Ingredient.model';
 
 @Component({
   selector: 'app-add',
@@ -11,7 +12,7 @@ import { Recipe } from 'src/app/Shared/recipe.model';
 })
 export class AddComponent implements OnInit {
 showForm='';
-
+recipeIngredients = new FormArray([]);
   constructor(private appService: ApplicationServices, 
     private route: ActivatedRoute, private router: Router) { }
 
@@ -32,5 +33,12 @@ showForm='';
     this.appService.addRecipes(recipe);
     form.reset();
 
+}
+
+onAddIngredientClicked(){
+  // this.recipeIngredients.insert(0, new FormGroup({
+  //   "name": new FormControl(""),
+  //   "amount": new FormControl("")
+  // }))
 }
 }

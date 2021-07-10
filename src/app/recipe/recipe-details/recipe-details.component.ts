@@ -1,8 +1,8 @@
 import { Ingredient } from './../../Shared/Ingredient.model';
 import { ApplicationServices } from './../../services/application.services';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/Shared/recipe.model';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-details',
@@ -17,10 +17,11 @@ export class RecipeDetailsComponent implements OnInit {
   singleRecipe!: Recipe;
   addShowClass = '!show'
 
-  constructor(private applicationServices: ApplicationServices,
-     private route: ActivatedRoute) {
 
-    this.applicationServices.recipeItemClicked.subscribe((recipe: Recipe) => {
+  constructor(private appServices: ApplicationServices,
+     private route: ActivatedRoute, private router: Router) {
+
+    this.appServices.recipeItemClicked.subscribe((recipe: Recipe) => {
 
       this.recipeReceived = recipe;
       this.userSelectedRecipe = true;
@@ -29,25 +30,28 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ingredients = this.applicationServices.returnIngredients();
-
-    this.route.params
-      .subscribe((params: Params) => {
-        this.Id= params.id;
-      })
-
+    this.ingredients = this.appServices.returnIngredients();
+   
   }
 
   onRecipeItemClicked(){
-    this.applicationServices.recipeItemClicked.next()
+    this.appServices.recipeItemClicked.next();
   }
 
   onDropdownClicked(){
     if(this.addShowClass === 'show'){
-      this.addShowClass = '!show'
+      this.addShowClass = '!show';
     }else{
-      this.addShowClass = 'show'
-    }
-    
+      this.addShowClass = 'show';
+    }3
   }
+
+  onDeleteItemClicked(){
+    this.route.params.subscribe((IdParam: Params)=> {
+      this.Id = IdParam.id;
+      this.appServices.deleteRecipe(this.Id);
+      this.router.navigate(['/recipe'])
+    })
+  }
+
 }

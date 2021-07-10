@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormControlDirective, FormGroup, NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApplicationServices } from 'src/app/services/application.services';
+import { Ingredient } from 'src/app/Shared/Ingredient.model';
 import { Recipe } from 'src/app/Shared/recipe.model';
 
 @Component({
@@ -17,6 +18,7 @@ export class EditComponent implements OnInit {
   recipes!: Recipe[];
   paramId = 0;
   recipeIngredients = new FormArray([]);
+  
   
 
   constructor(private activateRoute: ActivatedRoute, 
@@ -37,6 +39,7 @@ export class EditComponent implements OnInit {
       }
       this.initEditForm();
       this.getControls();
+      
     }); 
   }
 
@@ -83,6 +86,10 @@ export class EditComponent implements OnInit {
       "name": new FormControl(""),
       "amount": new FormControl("1")
     }))
+  }
+
+  deleteIngredient(ingredientId: number){
+   this.recipeIngredients.removeAt(ingredientId);
   }
 }
 

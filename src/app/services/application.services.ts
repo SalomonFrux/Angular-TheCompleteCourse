@@ -64,4 +64,9 @@ export class ApplicationServices {
          return new Recipe(recipe.name, recipe.content, recipe.image, recipe.ingredient);
         }
     }
+
+    deleteRecipe(id: number ){
+     this.recipes.splice(id, 1);
+    }
+   
 }

@@ -4,15 +4,12 @@
 
 <div *ngIf="userSelectedRecipe; else notSelected" class="mt-4 row mb-4" >
 
-
     <div class="col-12">
         <img [src]="recipeReceived.image" alt="image name" style="height: 300px; width: 85%;" class="float-right">
-
     </div>
 
     <div class="mt-2" style="margin-left: 90px;">
         <h1 class="">{{recipeReceived.name}}</h1>
-
 
         <div class="dropdown mt-4" >
             <button  class="btn btn-primary dropdown-toggle" type="button" 
@@ -26,11 +23,10 @@
                 <a class="dropdown-item" [routerLink]="['edit']" 
                 (click)="onRecipeItemClicked()">Edit</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item">Delete</a>
+                <a class="dropdown-item" (click)="onDeleteItemClicked()">Delete</a>
             </div>
         </div> 
 
-     
         <div class="">
             {{recipeReceived.content}}
             <a class="btn btn-link" href="">Read More</a>

@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="mt-4 col-12">
+    <div class="">
+      <div class="mb-2" *ngFor="let item of recipes; let  i = index"   (click)="onRecipeItemClicked(item)">
+        <a [routerLink]="[i]"  routerLinkActive="active"   class="list-group-item 
+        cleafix d-flex justify-content-between text-dark"
+    
+         >
+           <div class="nameAndDescriptionDiv">
+               <h4 class="list-group-item-heading">{{item.name}}</h4>
+               <p class="list-group-item-text" >{{item.content}}</p>
+           </div>
+           <span class="">
+               <img src="{{item.image}}"  alt="recipe Image" 
+                style="height:80px; width: 150px; margin-left: 3px;">
+           </span>
+         
+       </a>
+      </div>
+    </div>
+   
+  </div>
+ 
+</div>

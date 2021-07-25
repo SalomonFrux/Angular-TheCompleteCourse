@@ -16,6 +16,8 @@ import {DropdownDirective } from './directive/dropdown.directive';
 import { HomeComponent } from './home/home.component';
 import { EditComponent } from './recipe/edit/edit.component';
 import { AddComponent } from './recipe/add/add.component';
+import { TestComponent } from './test/test.component';
+import { TestComponentComponent } from './test-component/test-component.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { AddComponent } from './recipe/add/add.component';
       DropdownDirective,
       HomeComponent,
       EditComponent,
-      AddComponent
+      AddComponent,
+      TestComponent,
+      TestComponentComponent
    ],
   imports: [
     BrowserModule,
